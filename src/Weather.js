@@ -1,12 +1,12 @@
 import React, { useState }from "react";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import Loader from 'react-loader-spinner';
 
 export default function Weather(){
     const [weatherData, setweatherData] = useState({ ready: false });
     function handleResponse(response){
-        console.log(response.data);
        setweatherData( {
            ready: true,
            temperature: response.data.main.temp,
@@ -15,7 +15,7 @@ export default function Weather(){
            city: response.data.name,
            description:response.data.weather[0].description,
            iconUrl:`https://duckduckgo.com/assets/weather/svg/new/cloudy.svg`,
-           dateTime: "Tuesday 07:00",
+           dateTime: new Date(response.data.dt * 1000),
        });
         
     }
@@ -35,7 +35,9 @@ return  (
           </form>
         <h1>{weatherData.city}</h1>
         <ul>
-            <li>{weatherData.dateTime}</li>
+            <li>
+                <FormattedDate date={weatherData.dateTime} />
+            </li>
             <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row">
