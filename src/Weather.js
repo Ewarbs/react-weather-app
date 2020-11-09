@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState }from "react";
 import "./Weather.css";
+import axios from "axios";
 export default function Weather(){
-  return  (
+    const [weatherData, setweatherData] = useState({ ready: false });
+    function handleResponse(response){
+        console.log(response.data);
+       setweatherData( {
+           ready: true,
+           temperature: response.data.main.temp,
+            humidity: response.data.main.humidity,
+           wind:response.data.wind.speed,
+           city: response.data.name,
+           description:response.data.weather[0].description,
+           iconUrl:`https://duckduckgo.com/assets/weather/svg/new/cloudy.svg`,
+           dateTime: "Tuesday 07:00",
+       });
+        
+    }
+    
+    if (weatherData.ready){
+return  (
       <div className="Weather">
           <form>
               <div className="row">
@@ -13,17 +31,17 @@ export default function Weather(){
              </div>
              </div>
           </form>
-        <h1>New York</h1>
+        <h1>{weatherData.city}</h1>
         <ul>
-            <li>Wednesday 0:700</li>
-            <li>Mostly Cloudy</li>
+            <li>{weatherData.dateTime}</li>
+            <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row">
             <div className="col-6">
                 <div className="clearfix">
-              <img src="https://duckduckgo.com/assets/weather/svg/new/cloudy.svg" alt="Mostly cloudy" className="float-left" />
+              <img src={weatherData.iconUrl} alt={weatherData.description} className="float-left" />
             <div className="float-left">
-            <span className="temperature">6</span>
+  <span className="temperature">{weatherData.temperature}</span>
             <span className="units">°C</span>
             </div>
             </div>
@@ -31,17 +49,24 @@ export default function Weather(){
             <div className="col-6">
                 <ul>
                     <li>
-                      Precipitation: 15%  
+                        Humidity:{weatherData.humidity} %
                     </li>
                     <li>
-                        Humidity:72%
-                    </li>
-                    <li>
-                        Wind:13km/h%
+                        Wind:{weatherData.wind} km/h
                     </li>
                 </ul>
             </div>
         </div>
       </div>
-  )
+  );
+    } else {
+       const apiKey = "c8b5c278649c202b1b955ba083d5963b";
+    let city ="New York"
+    let apiUrl =`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    axios.get(apiUrl).then(handleResponse);  
+
+    return "Loading.."
+    }
+
+  
 }
