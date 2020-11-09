@@ -64,7 +64,7 @@ return  (
     } else {
        const apiKey = "c8b5c278649c202b1b955ba083d5963b";
     let city ="New York"
-    let apiUrl =`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     axios.get(apiUrl).then(handleResponse);  
 
     return(
@@ -76,7 +76,7 @@ return  (
          timeout={3000} //3 secs
  
       />
-    )
+    );
     
     }
 
