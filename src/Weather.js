@@ -1,6 +1,8 @@
 import React, { useState }from "react";
 import "./Weather.css";
 import axios from "axios";
+import Loader from 'react-loader-spinner';
+
 export default function Weather(){
     const [weatherData, setweatherData] = useState({ ready: false });
     function handleResponse(response){
@@ -65,7 +67,17 @@ return  (
     let apiUrl =`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     axios.get(apiUrl).then(handleResponse);  
 
-    return "Loading.."
+    return(
+        <Loader
+         type="Puff"
+         color="#00BFFF"
+         height={100}
+         width={100}
+         timeout={3000} //3 secs
+ 
+      />
+    )
+    
     }
 
   
