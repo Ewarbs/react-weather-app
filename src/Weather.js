@@ -16,7 +16,7 @@ export default function Weather(props){
            wind:response.data.wind.speed,
            city: response.data.name,
            description:response.data.weather[0].description,
-           iconUrl:`https://duckduckgo.com/assets/weather/svg/new/cloudy.svg`,
+           iconUrl:`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
            dateTime: new Date(response.data.dt * 1000),
        });
         
