@@ -3,7 +3,6 @@ import "./Weather.css";
 import WeatherInfo from "./WeatherInfo";
 import axios from "axios";
 import Loader from 'react-loader-spinner';
-import WeatherIcon from "./WeatherIcon";
 
 
 export default function Weather(props){
