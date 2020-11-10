@@ -6,7 +6,7 @@ return (
     <div className="App">
       <div className="container">
 <h1>{" "}</h1> 
-    <Weather />
+    <Weather defaultCity="Paris"/>
 <footer>
   This Project has been created by Emily Warburton and is{" "}
      <a href="https://github.com/Ewarbs/react-weather-app" target="blank">
